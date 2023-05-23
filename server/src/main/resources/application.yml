@@ -1,0 +1,21 @@
+# -----------------------
+# GENERAL CONFIGURATION
+# -----------------------
+# spring.profiles.active=Dev
+
+server:
+  port: 8081
+  servlet:
+    context-path: /server
+spring:
+  profiles:
+    active: Dev
+  datasource:
+    driver-class-name: org.h2.Driver
+    url: jdbc:h2:mem:teste
+    password: teste
+    username: teste
+  h2:
+    console.enabled: true
+  jpa:
+    defer-datasource-initialization: true

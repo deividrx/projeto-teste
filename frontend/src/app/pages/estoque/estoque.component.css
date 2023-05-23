@@ -1,0 +1,14 @@
+table {
+  width: 100%;
+  box-shadow: none;
+}
+
+.filter-row {
+  display: flex;
+  flex-direction: row;
+}
+
+.form-field-filtro {
+  flex-grow: 1;
+  margin-left: 10px;
+}

@@ -1,0 +1,10 @@
+<mat-form-field appearance="outline">
+  <mat-label>Produto</mat-label>
+  <input (blur)="onTouched()" matInput type="text" [matAutocomplete]="autoMunicipio" [formControl]="produtoFormControl">
+  <mat-autocomplete (optionsScroll)="onScroll()" matNativeControl [displayWith]="displayProduto"
+    #autoMunicipio="matAutocomplete">
+    <mat-option *ngFor="let produto of produtoFilterList | async" [value]="produto">
+      {{ produto.nome}}
+    </mat-option>
+  </mat-autocomplete>
+</mat-form-field>

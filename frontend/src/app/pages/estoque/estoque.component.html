@@ -1,0 +1,93 @@
+<mat-card class="body-content">
+  <form [formGroup]="formFilter" class="filter-row">
+    <app-produto-complete formControlName="produto" class="form-field-filtro"></app-produto-complete>
+    <mat-form-field appearance="outline" class="form-field-filtro">
+      <mat-label>Tipo</mat-label>
+      <mat-select formControlName="tipo">
+        <mat-option value="ENTRADA">
+          ENTRADA
+        </mat-option>
+        <mat-option value="SAIDA">
+          SAIDA
+        </mat-option>
+        <mat-option value="SALDO_INICIAL">
+          SALDO INICIAL
+        </mat-option>
+        <mat-option value="AJUSTE_ENTRADA">
+          AJUSTE ENTRADA
+        </mat-option>
+        <mat-option value="AJUSTE_SAIDA">
+          AJUSTE SAIDA
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field appearance="outline" class="form-field-filtro">
+      <mat-label>Data Inicial</mat-label>
+      <input matInput [matDatepicker]="picker" formControlName="dataInicial">
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+    <mat-form-field class="form-field-filtro" appearance="outline">
+      <mat-label>Data Final</mat-label>
+      <input matInput [matDatepicker]="picker2" formControlName="dataFinal" >
+      <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+      <mat-datepicker #picker2></mat-datepicker>
+    </mat-form-field>
+  </form>
+  <mat-card-content>
+    <button mat-flat-button color="accent" (click)="openDialog()" style="margin-left: 10px;">Novo</button>
+    <button mat-flat-button color="accent" (click)="filtrar()" style="margin-left: 10px;">Filtrar</button>
+    <button mat-flat-button color="accent" (click)="limpar()" style="margin-left: 10px;">Limpar</button>
+    <table mat-table matSort [dataSource]="dataSource" class="mat-elevation-z8">
+
+      <ng-container matColumnDef="data">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Data </th>
+        <td mat-cell *matCellDef="let element"> {{element.data | date: "dd/MM/yyyy"}} </td>
+      </ng-container>
+
+      <!-- Codigo de barras Column -->
+      <ng-container matColumnDef="produto">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Produto </th>
+        <td mat-cell *matCellDef="let element"> {{element.produto.nome}} </td>
+      </ng-container>
+
+      <!-- Quantidade minima Column -->
+      <ng-container matColumnDef="tipoMovimento">
+        <th mat-header-cell *matHeaderCellDef> Tipo Movimento </th>
+        <td mat-cell *matCellDef="let element"> {{element.tipoMovimento.replace("_", " ")}} </td>
+      </ng-container>
+
+      <!-- Saldo inicial Column -->
+      <ng-container matColumnDef="documento">
+        <th mat-header-cell *matHeaderCellDef> Documento </th>
+        <td mat-cell *matCellDef="let element"> {{element.documento}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="quantidade">
+        <th mat-header-cell *matHeaderCellDef> Quantidade </th>
+        <td mat-cell *matCellDef="let element"> {{element.quantidade}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="motivo">
+        <th mat-header-cell *matHeaderCellDef> Motivo </th>
+        <td mat-cell *matCellDef="let element"> {{element.motivo}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="saldo">
+        <th mat-header-cell *matHeaderCellDef> Saldo </th>
+        <td mat-cell *matCellDef="let element"> {{element.saldo}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="situacao">
+        <th mat-header-cell *matHeaderCellDef> Saldo </th>
+        <td mat-cell *matCellDef="let element"> {{situacao(element)}} </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+    <mat-paginator [length]="dataSource.totalElements" [pageSize]="10" [pageSizeOptions]="[5, 10, 25, 100]"
+      aria-label="Select page">
+    </mat-paginator>
+  </mat-card-content>
+</mat-card>

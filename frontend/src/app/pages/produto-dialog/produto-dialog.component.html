@@ -1,0 +1,25 @@
+<h2>Produto</h2>
+<form [formGroup]="produtoForm">
+  <mat-form-field *ngIf="produto?.id != null">
+    <mat-label>Id</mat-label>
+    <input formControlName="id" matInput type="text">
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Nome</mat-label>
+    <input formControlName="nome" matInput type="text">
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Código de barras</mat-label>
+    <input formControlName="codigoDeBarras" matInput type="text">
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Quantidade minima</mat-label>
+    <input matInput formControlName="quantidadeMinima" type="number" type="text">
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Saldo inicial</mat-label>
+    <input matInput formControlName="saldoInicial" type="number" type="text">
+  </mat-form-field>
+  <button mat-flat-button style="margin-right: 10px;" color="accent" (click)="salvar()">Salvar</button>
+  <button mat-flat-button color="accent" (click)="close()">Cacelar</button>
+</form>

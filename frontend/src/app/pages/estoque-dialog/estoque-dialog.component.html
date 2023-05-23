@@ -1,0 +1,45 @@
+<h2 style="margin-bottom: 30px;">Novo Lançamento</h2>
+<form [formGroup]="formEstoque" class="filter-row">
+  <app-produto-complete formControlName="produto" class="form-field-filtro"></app-produto-complete>
+  <mat-form-field appearance="outline" class="form-field-filtro">
+    <mat-label>Tipo</mat-label>
+    <mat-select formControlName="tipo">
+      <mat-option value="ENTRADA">
+        ENTRADA
+      </mat-option>
+      <mat-option value="SAIDA">
+        SAIDA
+      </mat-option>
+      <mat-option value="SALDO_INICIAL">
+        SALDO INICIAL
+      </mat-option>
+      <mat-option value="AJUSTE_ENTRADA">
+        AJUSTE ENTRADA
+      </mat-option>
+      <mat-option value="AJUSTE_SAIDA">
+        AJUSTE SAIDA
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field appearance="outline" class="form-field-filtro">
+    <mat-label>Data</mat-label>
+    <input matInput [matDatepicker]="picker" formControlName="data" required="false">
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+  </mat-form-field>
+  <mat-form-field appearance="outline">
+    <mat-label>Quantidade</mat-label>
+    <input matInput formControlName="quantidade" type="number">
+  </mat-form-field>
+  <mat-form-field appearance="outline">
+    <mat-label>Motivo</mat-label>
+    <textarea matInput formControlName="motivo"></textarea>
+  </mat-form-field>
+  <mat-form-field appearance="outline"
+    *ngIf="formEstoque.value['tipo'] === 'ENTRADA' || formEstoque.value['tipo'] === 'SAIDA'">
+    <mat-label>Documento</mat-label>
+    <textarea matInput formControlName="documento"></textarea>
+  </mat-form-field>
+</form>
+<button mat-flat-button style="margin-right: 10px;" color="accent" (click)="salvar()">Salvar</button>
+<button mat-flat-button color="accent" (click)="close()">Cacelar</button>
